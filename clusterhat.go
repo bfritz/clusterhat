@@ -5,10 +5,8 @@ import (
     "github.com/alexflint/go-arg"
 )
 
-var args struct {
-    State     string `arg:"positional,help:off | on"`
-    Devices []string `arg:"positional,help:led | pi1 | pi2 | pi3 | pi4"`
-}
+// populated with linker flag `-X main.version=${VERSION}`
+var version string
 
 var pin_nums = map[string] uint8 {
     "led": gpio.J8_29,
@@ -18,7 +16,17 @@ var pin_nums = map[string] uint8 {
     "pi4": gpio.J8_37,
 }
 
+type args struct {
+    State     string `arg:"positional,help:off | on"`
+    Devices []string `arg:"positional,help:led | pi1 | pi2 | pi3 | pi4"`
+}
+
+func (args) Version() string {
+    return "clusterhat " + version
+}
+
 func main() {
+    var args args
     arg.MustParse(&args)
 
     err := gpio.Open()
