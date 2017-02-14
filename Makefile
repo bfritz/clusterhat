@@ -1,4 +1,4 @@
-VERSION = 0.0.1
+VERSION = 0.0.2-SNAPSHOT
 LDFLAGS = -s -w -X main.version=${VERSION}
 
 sources := clusterhat.go
