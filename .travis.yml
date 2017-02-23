@@ -4,3 +4,8 @@ go:
   - 1.7.x
 
 script: make
+
+addons:
+  artifacts:
+    paths:
+      - clusterhat
